@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringEscapeUtils"%>
 <%@page import="java.util.regex.Matcher"%>
 <%@page import="java.util.regex.Pattern"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
@@ -22,14 +23,15 @@ if(testdata == null) {
 %>
 <body>
 <form action="index.jsp" method="post">
-Reg Ex : <input type="text" name="regex" value="<%=regex%>"/>&nbsp;&nbsp;&nbsp;<input type="submit" value="test"/>
+Reg Ex : <input type="text" name="regex" value="<%=StringEscapeUtils.escapeHtml4(regex)%>"/>&nbsp;&nbsp;&nbsp;<input type="submit" value="test"/>
 <br/>
-<textarea name="testdata" rows="10" cols="50"><%=testdata%></textarea>&nbsp;
+<textarea name="testdata" rows="10" cols="50"><%=StringEscapeUtils.escapeHtml4(testdata)%></textarea>&nbsp;
 <div name="resultdata" style="position:absolute; display:inline-block;border: 1px solid silver;">
 <%
 	if(StringUtils.isNotBlank(regex) && StringUtils.isNotBlank(testdata)) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(testdata);
+		testdata = StringEscapeUtils.escapeHtml4(testdata);
 		testdata = testdata.replace("\r\n", "<br/>");
 		StringBuffer output= new StringBuffer(testdata);
 		while(matcher.find()){
