@@ -32,7 +32,7 @@ Reg Ex : <input type="text" name="regex" value="<%=regex%>"/>&nbsp;&nbsp;&nbsp;<
 		testdata = testdata.replace("\r\n", "<br/>");
 		StringBuffer output= new StringBuffer(testdata);
 		while(matcher.find()){
-			String group = matcher.toMatchResult().group();
+			String group = matcher.toMatchResult().group().trim();
 			if(StringUtils.isNotBlank(group)){
 				output.insert(output.indexOf(group),"<mark>");
 				output.insert(output.indexOf(group) + group.length(),"</mark>");
