@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <%
+try{
 String regex = request.getParameter("regex");
 String testdata = request.getParameter("testdata");
 if(regex == null) {
@@ -24,7 +25,7 @@ if(testdata == null) {
 Reg Ex : <input type="text" name="regex" value="<%=regex%>"/>&nbsp;&nbsp;&nbsp;<input type="submit" value="test"/>
 <br/>
 <textarea name="testdata" rows="10" cols="50"><%=testdata%></textarea>&nbsp;
-<div name="resultdata" style="display:inline-block;border: 1px solid silver;">
+<div name="resultdata" style="position:absolute; display:inline-block;border: 1px solid silver;">
 <%
 	if(StringUtils.isNotBlank(regex) && StringUtils.isNotBlank(testdata)) {
 		Pattern pattern = Pattern.compile(regex);
@@ -43,5 +44,12 @@ Reg Ex : <input type="text" name="regex" value="<%=regex%>"/>&nbsp;&nbsp;&nbsp;<
 %>
 </div>
 </form>
+<br/>
+
+<%
+}catch(Exception ex) {
+	out.println("<div style=\"position:absolute; display:inline-block;background-color:red;\">"+ex.toString()+"</div>");
+}
+%>
 </body>
 </html>
